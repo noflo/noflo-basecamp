@@ -27,7 +27,7 @@
       "ReadProjectHours": "./components/ReadProjectHours.coffee",
       "ReadProjects": "./components/ReadProjects.coffee",
       "ReadTaskLists": "./components/ReadTaskLists.coffee",
-      "ReadTasks": "./components/ReadTasks.coffee",
+      "ReadTasks": "./components/ReadTasks.coffee"
     }
   },
   "scripts": {
