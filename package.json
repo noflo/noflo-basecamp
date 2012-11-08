@@ -1,0 +1,37 @@
+{
+  "name": "noflo-basecamp",
+  "description": "BaseCamp Classic components for the NoFlo flow-based programming environment",
+  "keywords": ["noflo", "basecamp"],
+  "author": "Henri Bergius <henri.bergius@iki.fi>",
+  "version": "0.0.1",
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/bergie/noflo/raw/master/LICENSE"
+  }],
+  "engines": {
+    "node": ">=0.6.0"
+  },
+  "dependencies": {
+    "noflo": "0.1.x",
+    "xml2js": "0.2.x"
+  },
+  "devDependencies": {
+    "nodeunit": ">=0.6.0",
+    "coffeelint": "*"
+  },
+  "noflo": {
+    "components": {
+      "ConvertToJson": "./components/ConvertToJson.coffee",
+      "ReadHours": "./components/ReadHours.coffee",
+      "ReadProject": "./components/ReadProject.coffee",
+      "ReadProjectHours": "./components/ReadProjectHours.coffee",
+      "ReadProjects": "./components/ReadProjects.coffee",
+      "ReadTaskLists": "./components/ReadTaskLists.coffee",
+      "ReadTasks": "./components/ReadTasks.coffee",
+    }
+  },
+  "scripts": {
+    "pretest": "./node_modules/.bin/coffeelint -r lib components",
+    "test": "./node_modules/.bin/nodeunit test"
+  }
+}
