@@ -57,7 +57,7 @@ class ConvertToJson extends noflo.Component
       "@type": "prj:Session"
       "@subject": "#{@id}time_entries/#{data.id['#']}"
       "prj:submittedDate": data.date['#']
-      "prj:duration": parseFloat(data.hours['#'])
+      "prj:duration": parseFloat(data.hours[0]['_'])
       "dc:description": data.description
       "prj:reporter": "#{@id}people/#{data['person-id']['#']}"
       "prj:inProject": "#{@id}projects/#{data['project-id']['#']}"
