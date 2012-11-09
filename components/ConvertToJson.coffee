@@ -1,5 +1,11 @@
 noflo = require "noflo"
 
+getVal = (node) ->
+  return node unless node.length
+  return node[0] unless node[0]['$']
+  return null unless node[0]['_']
+  return node[0]['_']
+
 class ConvertToJson extends noflo.Component
   constructor: ->
     @id = null
@@ -26,44 +32,44 @@ class ConvertToJson extends noflo.Component
 
     json =
       "@type": "prj:Project"
-      "@subject": "#{@id}projects/#{data.id['#']}"
-      "prj:name": data.name
-      "prj:status": data.status
-      "prj:startDate": data['created-on']['#']
-      "dc:modified": data['last-changed-on']['#']
+      "@subject": "#{@id}projects/#{getVal(data.id)}"
+      "prj:name": getVal data.name
+      "prj:status": getVal data.status
+      "prj:startDate": getVal data['created-on']
+      "dc:modified": getVal data['last-changed-on']
 
   convertTaskList: (data) ->
     json =
       "@type": "prj:TaskList"
-      "@subject": "#{@id}todo_lists/#{data.id['#']}"
-      "prj:name": data.name
-      "prj:inProject": "#{@id}projects/#{data['project-id']['#']}"
+      "@subject": "#{@id}todo_lists/#{getVal(data.id)}"
+      "prj:name": getVal data.name
+      "prj:inProject": "#{@id}projects/#{getVal(data['project-id'])}"
 
   convertTask: (data) ->
     json =
       "@type": "prj:Task"
-      "@subject": "#{@id}todo_items/#{data.id['#']}"
-      "prj:name": data.content
-      "prj:inTaskList": "#{@id}todo_lists/#{data['todo-list-id']['#']}"
-      "dc:created": data['created-at']['#']
+      "@subject": "#{@id}todo_items/#{getVal(data.id)}"
+      "prj:name": getVal data.content
+      "prj:inTaskList": "#{@id}todo_lists/#{getVal(data['todo-list-id'])}"
+      "dc:created": getVal data['created-at']
 
-    if data['completed-on']
-      json['prj:finishDate'] = data['completed-on']['#']
+    if getVal data['completed-on']
+      json['prj:finishDate'] = getVal data['completed-on']
 
     json
 
   convertHour: (data) ->
     json =
       "@type": "prj:Session"
-      "@subject": "#{@id}time_entries/#{data.id['#']}"
-      "prj:submittedDate": data.date['#']
-      "prj:duration": parseFloat(data.hours[0]['_'])
-      "dc:description": data.description
-      "prj:reporter": "#{@id}people/#{data['person-id']['#']}"
-      "prj:inProject": "#{@id}projects/#{data['project-id']['#']}"
+      "@subject": "#{@id}time_entries/#{getVal(data.id)}"
+      "prj:submittedDate": getVal data.date
+      "prj:duration": parseFloat getVal data.hours
+      "dc:description": getVal data.description
+      "prj:reporter": "#{@id}people/#{getVal(data['person-id'])}"
+      "prj:inProject": "#{@id}projects/#{getVal(data['project-id'])}"
         
-    if data['todo-item-id']['#']
-      json['prj:inTask'] = "#{@id}todo_items/#{data['todo-item-id']['#']}"
+    if getVal data['todo-item-id']
+      json['prj:inTask'] = "#{@id}todo_items/#{getVal(data['todo-item-id'])}"
 
     json
 
