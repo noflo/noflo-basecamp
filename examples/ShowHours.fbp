@@ -1,0 +1,6 @@
+# Gets latest hour reports from BaseCamp and displays them as JSON-LD
+# Change the values below to your setup
+'YOUR BASECAMP HOST' -> HOSTNAME ReadHours(basecamp/ReadHours)
+'YOUR BASECAMP APIKEY' -> APIKEY ReadHours()
+'now' -> START ReadHours()
+ReadHours() OUT -> IN ConvertHours(basecamp/ConvertToJson) OUT -> IN Display(Output)
