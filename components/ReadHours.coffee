@@ -28,7 +28,7 @@ class ReadHours extends base.BasecampComponent
     id = "https://#{@hostname}/"
     @parse data, (parsed) ->
       target.beginGroup id
-      target.send entry for entry in parsed['time-entry']
+      target.send entry for entry in parsed['time-entries']['time-entry']
       target.endGroup()
       target.disconnect()
     
