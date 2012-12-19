@@ -1,6 +1,7 @@
 noflo = require "noflo"
 
 getVal = (node) ->
+  return node unless typeof node is 'object'
   return node unless node.length
   return node[0] unless node[0]['$']
   return null unless node[0]['_']
